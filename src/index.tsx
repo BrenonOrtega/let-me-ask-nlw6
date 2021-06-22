@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App';
 import { Home } from './Pages/Home';
-import { NewRoom } from './Pages/NewRoom';
 
-import "./Services/Firebase";
 import "./Styles/global.scss";
+import "./services/firebase";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Home /> */}
-    <NewRoom />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
