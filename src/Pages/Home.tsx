@@ -1,22 +1,21 @@
 import { useHistory } from "react-router-dom";
-import { Button } from "../Components/Button";
+import { Button } from "../components/Button";
+import { auth, firebase } from "../services/firebase";
 
 import illustrationImg from "../Assets/images/illustration.svg";
 import googleIcon from "../Assets/images/google-icon.svg";
 import logoImg from "../Assets/images/logo.svg";
 
-import "../Styles/auth.scss";
-import { auth, firebase } from "../services/firebase";
-
+import "../styles/auth.scss";
 export function Home() {
     const history = useHistory();
     
     function HandleCreateRoom() {
         const provider = new firebase.auth.GoogleAuthProvider();
-        auth().signInWithPopup(provider).then(result => {
+        auth.signInWithPopup(provider).then(result => {
             console.log(result);
-        });
-            //history.push("/rooms/new");
+            history.push("/rooms/new");
+        }); 
     }
 
     return (

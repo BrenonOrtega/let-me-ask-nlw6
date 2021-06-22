@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-import { Button } from "../Components/Button";
-
 import logoImg from "../Assets/images/logo.svg";
 import illustrationImg from "../Assets/images/illustration.svg";
+import "../styles/auth.scss";
 
-import "../Styles/auth.scss";
+import { Link } from "react-router-dom";
+import { Button } from "../components/Button";
 
-export function NewRoom(props: any) {
+export function NewRoom() {
     return (
         <div id="page-auth">
         <aside>
