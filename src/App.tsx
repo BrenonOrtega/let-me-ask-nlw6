@@ -1,18 +1,21 @@
-import React, { useContext } from 'react';
-import { createContext } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
-import { AuthContext } from './context/AuthContext';
+import firebase from 'firebase';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext";
 import { Home } from './pages/Home';
 import { NewRoom } from './pages/NewRoom';
+import { Room } from './pages/Room';
 
 function App() {
-  const { user, SignInWithGoogle } = useContext(AuthContext);
+  
   return (
     <BrowserRouter>
-    <AuthContext.Provider value={{user, SignInWithGoogle}}>
-      <Route path="/" exact component={Home}/>
-      <Route path="/rooms/new"  component={NewRoom}/> 
-      </AuthContext.Provider>
+      <AuthContextProvider>
+        <Switch>
+          <Route path="/" exact component={ Home }/>
+          <Route path="/rooms/new"  component={ NewRoom }/> 
+          <Route path="/rooms/:id" component={ Room } />
+        </Switch>
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }
