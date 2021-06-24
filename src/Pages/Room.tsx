@@ -9,11 +9,13 @@ import { Button } from '../components/Button';
 
 import logoImg from '../Assets/images/logo.svg';
 import '../styles/room.scss';
+import { Question } from '../components/Question';
+import { useRoom } from '../hooks/useRoom';
 
 
 type RoomParams ={ id: string; }
 
-type Question = { 
+type QuestionType = { 
   id?: string, 
   author: {
     name: string,
@@ -24,26 +26,18 @@ type Question = {
   isHighlighted: boolean
 };
 
-type FirebaseQuestion = Record<string, {
-  author: {
-    name: string;
-    avatar: string;
-  },
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
-}>
+
 
 export function Room() {
   const roomDbRef = "rooms/";
   const questionDbRef = "/questions";
-  const { user, signInWithGoogle } = useAuth();
   const params = useParams<RoomParams>();
   const roomId = params.id;
+  
+  const { user, signInWithGoogle } = useAuth();
+  const {questions, title } = useRoom(roomId);
 
   const [question, setQuestion] = useState('');
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [title, setTitle] = useState(roomId);
   
   const handleSendQuestion = async(event: FormEvent) => {
     event.preventDefault();
@@ -69,32 +63,6 @@ export function Room() {
     setQuestion('');
   };
 
-  useEffect(() => {
-    const roomReferences = database.ref(roomDbRef+roomId)
-    
-    roomReferences.on('value', room => {
-      const databaseRoom = room.val();
-      const firebaseQuestions: FirebaseQuestion = databaseRoom.questions ?? {};
-
-      const parsedQuestions = Object
-        .entries(firebaseQuestions)
-        .map(([key, value]) => {
-          return {
-            id: key,
-            content: value.content,
-            author: value.author,
-            isHighlighted: value.isHighlighted,
-            isAnswered: value.isAnswered
-          }
-      });
-      
-      setTitle(databaseRoom.title);
-      setQuestions(parsedQuestions);
-    });
-  }, [roomId]);
-
-
-
   return (
     <div id="page-room">
       <header>
@@ -119,33 +87,44 @@ export function Room() {
         </div>
 
         <form onSubmit={handleSendQuestion}>
-          <textarea placeholder="Diga ao dono da sala suas dúvidas!" onChange={event => setQuestion(event.target.value)}/>
+          <textarea 
+            placeholder="Diga ao dono da sala suas dúvidas!" 
+            onChange={event => setQuestion(event.target.value)}
+          />
           <div className="form-footer">
-            {(! user ) 
-            ? (<span>
+          { (!user) 
+            ?(<span>
                 É necessário estar logado para fazer perguntas
-                <button onClick={signInWithGoogle}>clique aqui</button>
-              </span> )
-            : (<span >
+                <button onClick={signInWithGoogle}>
+                  clique aqui
+                </button>
+              </span> 
+            )
+            :(<span >
                 <img src={user?.avatar} alt="User profile picture" />
                 <p>{user?.name}</p>
-              </span> )
-            }
-            <Button disabled={(!user)} type="submit">Enviar Pergunta</Button>
+              </span> 
+            )
+          }
+            <Button 
+              disabled={(!user)} 
+              type="submit">
+              Enviar Pergunta
+            </Button>
           </div>
         </form>
 
-        <div className="questions">
-          {/* {questions.forEach( question => {
-            <div>
-            <span id="owner-profile">
-              <img src={question?.author.avatar} alt="question owner profile" />
-              {question.author.name}
-            </span>
-              <p>{question.content}</p>
-            </div>
-          })} */}
-          {JSON.stringify(questions)}
+        <div className="question-list">
+        { questions.map( question => {
+            return(
+              <Question 
+                key={ question.id }
+                content={question.content} 
+                author={question.author}
+              />
+            );
+          })
+        }
         </div>
 
       </main>
