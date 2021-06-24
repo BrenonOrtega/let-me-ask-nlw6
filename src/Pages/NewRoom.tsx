@@ -15,7 +15,6 @@ export function NewRoom() {
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
-
     if(newRoom.trim() === '') {
       return;
     }
@@ -26,7 +25,7 @@ export function NewRoom() {
       authorId: user?.id
     });
 
-    history.push(`rooms/${createdRoom.key}`)
+    history.push(`/${createdRoom.key}`)
   }
 
   return (
@@ -44,13 +43,12 @@ export function NewRoom() {
           <input
           type="text"
           placeholder="Nome da sala"
-          onChange={event => setNewRoom(event.target.value)}
+          onChange={event => setQuestion(event.target.value)}
         />
           <Button type="submit">
               Criar sala
           </Button>
         </form>
-        
         <p>
           Quer entrar em uma sala existente? <Link to="/">Clique aqui</Link>
         </p>
@@ -58,4 +56,7 @@ export function NewRoom() {
     </main>
   </div>
 );
+}
+function setQuestion(value: string): void {
+  throw new Error("Function not implemented.");
 }
