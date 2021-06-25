@@ -1,5 +1,4 @@
 .button {
-    height: 50px;
     border-radius: 9px;
     font-weight: 500;
     background: #5351e7;
@@ -14,6 +13,12 @@
     border: 0;        
 
     transition: filter 0.25s;
+
+    &.outlined {
+        background: #FFF;
+        border: 1px solid #5351e7;
+        color: #5351e7;
+    }
 
     &:disabled {
         opacity: 0.75;

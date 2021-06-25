@@ -13,20 +13,9 @@ import { Question } from '../components/Question';
 import { useRoom } from '../hooks/useRoom';
 
 
-type RoomParams ={ id: string; }
-
-type QuestionType = { 
-  id?: string, 
-  author: {
-    name: string,
-    avatar: string
-  },
-  content: string,
-  isAnswered: boolean,
-  isHighlighted: boolean
+type RoomParams ={ 
+  id: string
 };
-
-
 
 export function Room() {
   const roomDbRef = "rooms/";
@@ -35,7 +24,7 @@ export function Room() {
   const roomId = params.id;
   
   const { user, signInWithGoogle } = useAuth();
-  const {questions, title } = useRoom(roomId);
+  const { questions, title } = useRoom(roomId);
 
   const [question, setQuestion] = useState('');
   
