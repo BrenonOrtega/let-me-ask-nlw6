@@ -1,7 +1,7 @@
 # Let Me Ask - Next Level Week 6
 Projeto desenvolvido durante a Nex Level week de número 6 da Rocketseat.
 
-## objetivo
+## :dart: objetivo
 O desenvolvimento de uma aplicação front-end utilizando [Typescript], [ReactJS] e [Google Firebase] demonstrando os conceitos de BaaS (Back-end as a Service) com o intuito de gerar uma plataforma para que streamers possam receber e responder perguntas de seus segugidos de maneira centralizada em uma única plataforma.
 
 <svg width="157" height="75" viewBox="0 0 157 75" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,13 +39,19 @@ O desenvolvimento de uma aplicação front-end utilizando [Typescript], [ReactJS
 
 [ReactJS](https://reactjs.org/)
 
+[Sass](https://sass-lang.com/)
+
 [Google Firebase](https://firebase.google.com/)
 
-## Aprendizados
- - Utiliza
-
-
-## Aplicação
+## :notebook: Aprendizados :fountain_pen:
+ - Utilização da Context API do React para compartilhamento de estados.
+ - Criação de hooks customizados para compartilhamento de funções dentro do código
+ - utilização do pré-processador de CSS para estilização de páginas.
+ - Criação de componentes React e implementação de atributos customizados.
+ - Criação e utilização de tipos definidos através do typescript.
+ - Utilização de bancos de dados não relacionais do firebase.
+ - HTML, CSS e JS no geral, estou evoluindo no front-end ainda. :sweat_smile:
+### :gear: Demonstração :hammer_and_wrench:
 #### Tela Inicial
 ![Home page](public/demos/Home.JPG)
 
