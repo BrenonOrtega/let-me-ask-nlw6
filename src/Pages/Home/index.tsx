@@ -31,12 +31,23 @@ export function Home() {
       return;
     }
 
-    const roomRefence = await database.ref(`${roomRefName}${roomCode}`).get();
-    if (!roomRefence.exists()) {
+    
+    const roomReference = await database.ref(`${roomRefName}${roomCode}`).get();
+    let roomPath = `${roomRefName}${roomCode}`;
+    
+    if (!roomReference.exists()) {
       alert("Room does not exists");
       return;
     }
-    history.push(`${roomRefName}${roomCode}`);
+    if(roomReference.val().closedAt) {
+      alert("This Room is already closed");
+      return;
+    }
+
+    if (roomReference.child("authorId").val() === user?.id) {
+      roomPath = "admin/" + roomPath;
+    }
+    history.push(roomPath);
   }
 
   return (
