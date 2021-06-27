@@ -5,6 +5,22 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
 
+  &.answered {
+    background: #979595;
+
+    .footer {
+      color: #a3a1a5;
+    }
+  }
+
+  &.highlighted {
+    background: #f4f0ff;
+    border: 1px solid #6949c7;
+    
+    .footer {
+      color: #a3a1b3;
+    }
+  }
   /* Hackzinho para aplicar um estilo a partir de todo o segundo elemento.
      o "&" comercial sempre se refere ao próprio elemento, portanto o estilo 
      abaixo só sera aplicado quando ouver um ".question" seguido de outro ".question" */

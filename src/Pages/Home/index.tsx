@@ -10,7 +10,7 @@ import logoImg from "../../Assets/images/logo.svg";
 
 import "../../styles/auth.scss";
 
-export function Home() {
+export default function Home() {
   const roomRefName = "rooms/";
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
@@ -57,7 +57,7 @@ export function Home() {
         <h1>
           <strong>Crie salas de Q&amp;A ao-vivo.</strong>
         </h1>
-        <p>Tire dúvidas da sua audiência em tempo real</p>
+        <h5>Tire dúvidas da sua audiência em tempo real</h5>
       </aside>
       <main>
         <div className="main-content">
