@@ -3,7 +3,7 @@
 Projeto desenvolvido durante a Next Level Week de número 6 da Rocketseat.
 
 ## :dart: objetivo
-O desenvolvimento de uma aplicação front-end utilizando [Typescript], [ReactJS] e [Google Firebase] demonstrando os conceitos de BaaS (Back-end as a Service) com o intuito de gerar uma plataforma para que streamers possam receber e responder perguntas de seus segugidos de maneira centralizada em uma única plataforma.
+O desenvolvimento de uma aplicação front-end utilizando [Typescript](), [ReactJS]() e [Google Firebase]() demonstrando os conceitos de BaaS (Back-end as a Service) e a utilização de bancos de dados não relacionais com o intuito de gerar uma plataforma para que streamers possam receber e responder perguntas de seus seguidoress de maneira centralizada em uma plataforma.
 ## :computer: Tecnologias Utilizadas
 [Typescript](https://www.typescriptlang.org/)
 
