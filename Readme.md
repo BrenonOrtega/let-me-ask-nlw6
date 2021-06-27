@@ -40,7 +40,12 @@ O desenvolvimento de uma aplicação front-end utilizando [Typescript](), [React
  yarn start
  ```
 
-
+### :building_construction: TODO :warning:
+ - :grey_question: Utilização de outros bancos de dados
+ - :grey_question: Implementação de um banco in-memory para demonstração sem autenticações.
+ - :grey_question: Modo Dark/Light.
+ - :grey_question: Adição de PWA (Progressive Web Apps).
+ - :grey_question: Mudanças na estilização para variar da aplicação demonstrada durante o curso.
 
 ## :gear: Demonstração :hammer_and_wrench:
 ### - Tela Inicial
