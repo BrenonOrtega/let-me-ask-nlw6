@@ -8,7 +8,7 @@ import logoImg from "../../Assets/images/logo.svg";
 import illustrationImg from "../../Assets/images/illustration.svg";
 import "../../styles/auth.scss";
 
-export function NewRoom() {
+export default function NewRoom() {
   const { user } = useAuth();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState("");
@@ -32,6 +32,10 @@ export function NewRoom() {
     <div id="page-auth">
       <aside>
         <img src={illustrationImg} alt="Ilustração de perguntas e respostas" />
+        <h1>
+          <strong>Crie salas de Q&amp;A ao-vivo.</strong>
+        </h1>
+        <h5>Tire dúvidas da sua audiência em tempo real</h5>
       </aside>
       <main>
         <div className="main-content">
