@@ -21,6 +21,27 @@ O desenvolvimento de uma aplicação front-end utilizando [Typescript](), [React
  - Criação e utilização de tipos definidos através do typescript.
  - Utilização de bancos de dados não relacionais do firebase.
  - HTML, CSS e JS no geral, estou evoluindo no front-end ainda. :sweat_smile:
+
+ ## :runner: Como Rodar o Projeto :arrow_forward:
+ #### É necessário uma conta no Firebase com realtime database habilitado para poder rodar o mesmo e criar um arquivo inserindo os dados devidos no arquivo .env.example na pasta raiz do projeto.
+ - Clone o reposítorio em um local da sua escolha.
+ - Navegue até a pasta principal.
+ - Use o comando as seguir para baixar as dependências  do projeto: 
+ ```bash 
+    npm install
+ ```
+ ou 
+  ```bash 
+    yarn -i
+ ```
+
+ - utilize o comando a seguir para iniciar a aplicação.
+ ```bash 
+ yarn start
+ ```
+
+
+
 ## :gear: Demonstração :hammer_and_wrench:
 ### - Tela Inicial
 ![Home page](public/demos/Home.JPG)
