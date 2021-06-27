@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormEvent, useState } from "react";
 
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { database } from "../../services/firebase";
 import { RoomCode } from "../../components/RoomCode";
 import { Button } from "../../components/Button";
 import { Question } from "../../components/Question";
 import { useRoom } from "../../hooks/useRoom";
+import { HandleNewLike, LikeType } from "./scripts";
 
 import logoImg from "../../Assets/images/logo.svg";
 import "../../styles/room.scss";
@@ -15,19 +18,48 @@ type RoomParams = {
 };
 
 export default function Room() {
+  const roomDbRef = "rooms/";
+  const questionDbRef = "/questions";
   const params = useParams<RoomParams>();
   const roomId = params.id;
+
+  const { user, signInWithGoogle } = useAuth();
   const { questions, title } = useRoom(roomId);
+
+  const [question, setQuestion] = useState("");
+
+  const handleSendQuestion = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (question.trim() === "") {
+      return;
+    }
+    if (!user) {
+      await signInWithGoogle();
+    }
+
+    const newQuestion = {
+      content: question,
+      author: {
+        name: user?.name,
+        avatar: user?.avatar,
+      },
+      isAnswered: false,
+      isHighlighted: false,
+    };
+
+    const questionsPath = `${roomDbRef}${roomId}${questionDbRef}`;
+    await database.ref(questionsPath).push(newQuestion);
+    setQuestion("");
+  };
+  const handleNewLike = async (like: LikeType) => HandleNewLike(like);
 
   return (
     <div id="page-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="LetMeAsk logo image" />
-          <div>
-            <RoomCode code={roomId} />
-            <Button isOutlined>Encerrar sala</Button>
-          </div>
+          <RoomCode code={roomId} />
         </div>
       </header>
 
@@ -44,6 +76,28 @@ export default function Room() {
           <h2>Faça sua pergunta</h2>
         </div>
 
+        <form onSubmit={handleSendQuestion}>
+          <textarea
+            placeholder="Diga ao dono da sala suas dúvidas!"
+            onChange={(event) => setQuestion(event.target.value)}
+          />
+          <div className="form-footer">
+            {!user ? (
+              <span>
+                <span>É necessário estar logado para fazer perguntas</span>
+                <button onClick={signInWithGoogle}>clique aqui</button>
+              </span>
+            ) : (
+              <span>
+                <img src={user?.avatar} alt="User profile picture" />
+                <p>{user?.name}</p>
+              </span>
+            )}
+            <Button disabled={!user} type="submit">
+              Enviar Pergunta
+            </Button>
+          </div>
+        </form>
         <div className="question-list">
           {questions.map((question) => {
             return (
@@ -53,11 +107,19 @@ export default function Room() {
                 author={question.author}
               >
                 <button
-                  className={`like-button`}
+                  className={`like-button ${question.likeId ? "liked" : ""}`}
                   type="button"
                   aria-label="give a like"
+                  onClick={async () =>
+                    handleNewLike({
+                      roomId,
+                      userId: user?.id,
+                      questionId: question.id,
+                      likeId: question.likeId,
+                    })
+                  }
                 >
-                  <div>10</div>
+                  {question.likeCount > 0 && <div>{question.likeCount} </div>}
                   <svg
                     width="24"
                     height="24"

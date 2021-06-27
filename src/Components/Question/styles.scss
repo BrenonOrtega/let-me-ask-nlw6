@@ -3,7 +3,7 @@
   background: #fefefe;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  padding:24px;
+  padding: 24px;
 
   /* Hackzinho para aplicar um estilo a partir de todo o segundo elemento.
      o "&" comercial sempre se refere ao próprio elemento, portanto o estilo 
@@ -11,7 +11,7 @@
   & + .question {
     margin-top: 8px;
   }
-  
+
   p {
     color: #29292e;
   }
@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    
+
     .user-info {
       img {
         width: 32px;
@@ -33,8 +33,33 @@
         margin-left: 8px;
         color: #737380;
         font-size: 14px;
-
       }
+    }
+  }
+  button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    gap: 8px;
+
+    transition: filter 0.4s;
+
+    &.like-button {
+      display: flex;
+      align-items: flex-end;
+      border: transparent;
+    }
+
+    &.liked {
+      color: #835afd;
+      svg path {
+        stroke: #fff;
+        fill: #da60ff;
+      }
+    }
+
+    &:hover {
+      filter: opacity(0.75);
     }
   }
 }
